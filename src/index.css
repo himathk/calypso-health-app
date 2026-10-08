@@ -1,0 +1,175 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/outfit';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+:root[data-theme='dark'] {
+  --bg: 8 11 30;
+  --surface: 19 24 54;
+  --elevated: 30 36 76;
+  --fg: 240 242 255;
+  --muted: 150 158 200;
+  --line: 255 255 255;
+  --coral: 255 107 120;
+  --peach: 255 170 100;
+  --aqua: 56 218 230;
+  --violet: 146 116 255;
+  --lime: 170 232 72;
+  --sun: 255 208 90;
+  --glass-alpha: 0.62;
+  --line-alpha: 0.08;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg: 245 243 255;
+  --surface: 255 255 255;
+  --elevated: 238 235 252;
+  --fg: 22 24 52;
+  --muted: 102 108 146;
+  --line: 22 24 52;
+  --coral: 240 82 98;
+  --peach: 245 140 60;
+  --aqua: 0 172 190;
+  --violet: 112 80 240;
+  --lime: 102 170 20;
+  --sun: 228 166 20;
+  --glass-alpha: 0.72;
+  --line-alpha: 0.08;
+  color-scheme: light;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+  button {
+    @apply select-none;
+  }
+  input,
+  select,
+  textarea {
+    @apply font-sans;
+  }
+  ::selection {
+    background: rgb(var(--coral) / 0.35);
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgb(var(--surface) / var(--glass-alpha));
+    border: 1px solid rgb(var(--line) / var(--line-alpha));
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+  }
+  .card {
+    @apply glass rounded-3xl p-5 shadow-card;
+  }
+  .hairline {
+    border-color: rgb(var(--line) / var(--line-alpha));
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, rgb(var(--coral)), rgb(var(--peach)) 45%, rgb(var(--sun)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-cool {
+    background: linear-gradient(100deg, rgb(var(--aqua)), rgb(var(--violet)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-brand {
+    background-image: linear-gradient(135deg, rgb(var(--coral)), rgb(var(--peach)));
+  }
+  .bg-cool {
+    background-image: linear-gradient(135deg, rgb(var(--aqua)), rgb(var(--violet)));
+  }
+  .input {
+    @apply w-full rounded-2xl border bg-elevated/60 px-4 py-3 text-fg outline-none transition placeholder:text-muted/70 focus:ring-2;
+    border-color: rgb(var(--line) / 0.1);
+    --tw-ring-color: rgb(var(--coral) / 0.5);
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+  }
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 0.75rem);
+  }
+}
+
+/* Range input styled to match the theme */
+input[type='range'].range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(var(--coral)) 0%, rgb(var(--peach)) var(--fill, 50%), rgb(var(--line) / 0.12) var(--fill, 50%));
+  outline: none;
+}
+input[type='range'].range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 6px rgb(var(--coral) / 0.25), 0 4px 12px rgb(0 0 0 / 0.3);
+  cursor: grab;
+  transition: box-shadow 0.2s;
+}
+input[type='range'].range:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgb(var(--coral) / 0.25), 0 4px 12px rgb(0 0 0 / 0.3);
+}
+input[type='range'].range::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 0 6px rgb(var(--coral) / 0.25), 0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  filter: invert(var(--invert, 0.8));
+  opacity: 0.6;
+}
+:root[data-theme='light'] input[type='time']::-webkit-calendar-picker-indicator {
+  --invert: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
