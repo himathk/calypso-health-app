@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Connect, Plugin, ViteDevServer } from 'vite';
-import { handleAnalyzeFood } from './analyzeFood';
+import { handleAnalyzeFood } from './analyzeFood.js';
 
 const MAX_BODY = 10 * 1024 * 1024;
 

@@ -1,5 +1,5 @@
 // Vercel Function (Node.js runtime). Set ANTHROPIC_API_KEY in the project settings.
-import { handleAnalyzeFood } from '../server/analyzeFood';
+import { handleAnalyzeFood } from '../server/analyzeFood.js';
 
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;

@@ -5,7 +5,7 @@ import {
   parseFoodResponse,
   validateFoodRequest,
   type FoodAnalysis,
-} from '../src/lib/foodAi/shared';
+} from '../src/lib/foodAi/shared.js';
 
 export interface HandlerResult {
   status: number;

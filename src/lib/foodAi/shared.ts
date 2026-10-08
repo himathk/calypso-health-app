@@ -116,7 +116,8 @@ export function validateFoodRequest(body: unknown): FoodAnalysisRequest {
   if (!parsed.success) {
     throw new FoodAnalysisError('Expected { image: base64, mediaType, note? } with a JPEG/PNG/WebP/GIF image.', 'bad_request');
   }
-  return parsed.data;
+  const { image, mediaType, note } = parsed.data;
+  return { image: image as string, mediaType: mediaType as FoodImageMediaType, note };
 }
 
 export function buildFoodRequest(req: FoodAnalysisRequest): Anthropic.Beta.Messages.MessageCreateParamsNonStreaming {
